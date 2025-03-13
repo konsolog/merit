@@ -149,7 +149,7 @@ client.on('interactionCreate', async interaction => {
         } else {await interaction.reply(`⛔ **You are not authorized to run this command!**`)}
     }
 
-    if (interaction.commandName === 'merit') {
+    if (interaction.commandName === 'demerit') {
         if (interaction.member.roles.cache.some(r => r.name === "Arbor: House of Authority") === true) {
             const whatToIncrement = (name) => {
                 const factionIds = {
