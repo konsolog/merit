@@ -145,7 +145,7 @@ client.on('interactionCreate', async interaction => {
             }
             const { data, error } = await supabase
                 .rpc('increment_counter', { p_id: whatToIncrement(interaction.options.getString('faction')), p_increment: interaction.options.getInteger('points') });
-            await interaction.reply(`🎉 **${interaction.options.getInteger('points')} Merits** added to **${interaction.options.getString('faction')}**`)
+            await interaction.reply(`🎉 **${interaction.options.getInteger('points')} Merit(s)** added to **${interaction.options.getString('faction')}**`)
         } else {await interaction.reply(`⛔ **You are not authorized to run this command!**`)}
     }
 
@@ -163,7 +163,7 @@ client.on('interactionCreate', async interaction => {
             }
             const { data, error } = await supabase
                 .rpc('anti_counter', { p_id: whatToIncrement(interaction.options.getString('faction')), p_increment: interaction.options.getInteger('points') });
-            await interaction.reply(`❌ **${interaction.options.getInteger('points')} Demerits** to **${interaction.options.getString('faction')}**`)
+            await interaction.reply(`❌ **${interaction.options.getInteger('points')} Demerit(s)** to **${interaction.options.getString('faction')}**`)
         } else {await interaction.reply(` **You are not authorized to run this command!**`)}
     }
 })
