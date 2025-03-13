@@ -132,6 +132,7 @@ client.on('interactionCreate', async interaction => {
     }
 
     if (interaction.commandName === 'merit') {
+        await interaction.deferReply()
         if (interaction.member.roles.cache.some(r => r.name === "Arbor: House of Authority") === true) {
             const whatToIncrement = (name) => {
                 const factionIds = {
@@ -145,11 +146,12 @@ client.on('interactionCreate', async interaction => {
             }
             const { data, error } = await supabase
                 .rpc('increment_counter', { p_id: whatToIncrement(interaction.options.getString('faction')), p_increment: interaction.options.getInteger('points') });
-            await interaction.reply(`🎉 **${interaction.options.getInteger('points')} Merit(s)** added to **${interaction.options.getString('faction')}**`)
-        } else {await interaction.reply(`⛔ **You are not authorized to run this command!**`)}
+            await interaction.editReply(`🎉 **${interaction.options.getInteger('points')} Merit(s)** added to **${interaction.options.getString('faction')}**`)
+        } else {await interaction.editReply(`⛔ **You are not authorized to run this command!**`)}
     }
 
     if (interaction.commandName === 'demerit') {
+        await interaction.deferReply()
         if (interaction.member.roles.cache.some(r => r.name === "Arbor: House of Authority") === true) {
             const whatToIncrement = (name) => {
                 const factionIds = {
@@ -163,8 +165,8 @@ client.on('interactionCreate', async interaction => {
             }
             const { data, error } = await supabase
                 .rpc('anti_counter', { p_id: whatToIncrement(interaction.options.getString('faction')), p_increment: interaction.options.getInteger('points') });
-            await interaction.reply(`❌ **${interaction.options.getInteger('points')} Demerit(s)** to **${interaction.options.getString('faction')}**`)
-        } else {await interaction.reply(` **You are not authorized to run this command!**`)}
+            await interaction.editReply(`❌ **${interaction.options.getInteger('points')} Demerit(s)** to **${interaction.options.getString('faction')}**`)
+        } else {await interaction.editReply(` **You are not authorized to run this command!**`)}
     }
 })
 
